@@ -1,5 +1,7 @@
+local Magic8BallGroup = require("magic8ball.autocmd")
+
 --@class Magic8Ball
---@field config Magic8BallConfig
+--@field group_id number
 --@field ui Magic8BallUI
 local Magic8Ball = {}
 
@@ -7,24 +9,18 @@ Magic8Ball.__index = Magic8Ball
 
 --@return Magic8Ball
 function Magic8Ball:new()
-    local config = "amongus" --TODO:add config here
-
-    local magic8Ball = setmetatable({
-        config = config,
-        ui = "amogus" --TODO:add ui
-    }, self)
+    local magic8Ball = setmetatable({}, self)
+    self.group_id = Magic8BallGroup
 
     return magic8Ball
 end
 
-local magic8Ball = Magic8Ball:new()
-
 --@param self Magic8Ball
---@param config Magic8BallConfig
 function Magic8Ball.setup(self, config)
-    --TODO:do config magic here
-
     return self
 end
+
+local magic8Ball = Magic8Ball:new()
+
 
 return magic8Ball
