@@ -1,4 +1,4 @@
-local Magic8BallGroup = require("magic8ball.autocmd")
+local Magic8BallGroup = vim.api.nvim_create_augroup("Magic8Ball", {})
 
 --@class Magic8Ball
 --@field group_id number
@@ -8,19 +8,18 @@ local Magic8Ball = {}
 Magic8Ball.__index = Magic8Ball
 
 --@return Magic8Ball
-function Magic8Ball:new()
-    local magic8Ball = setmetatable({}, self)
+function Magic8Ball.new()
+    local self = setmetatable({}, Magic8Ball)
     self.group_id = Magic8BallGroup
 
-    return magic8Ball
+    return self
 end
 
 --@param self Magic8Ball
 function Magic8Ball.setup(self, config)
-    return self
+    print("AMOGUS")
 end
 
-local magic8Ball = Magic8Ball:new()
-
+local magic8Ball = Magic8Ball.new()
 
 return magic8Ball
