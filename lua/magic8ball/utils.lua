@@ -8,7 +8,7 @@ function M.on_close(buf_id, cb)
         buffer = buf_id,
         callback = function()
             cb()
-        end,
+        end
     })
 end
 
