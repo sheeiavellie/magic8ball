@@ -27,7 +27,7 @@ local function create_window()
         width = 24,
         height = 5,
         border = 'rounded',
-        title = 'Magic 8 Ball',
+        title = 'Magic8Ball🔮',
         title_pos = 'center',
         style = 'minimal',
     })
@@ -44,6 +44,20 @@ function Magic8ballFloat.new(m8b_state)
     return self
 end
 
+function Magic8ballFloat:toggle()
+    if self.buf_id == nil then
+        local buf_id, win_id = create_window()
+        self.buf_id = buf_id
+        self.win_id = win_id
+    else
+        close_window(self.buf_id, self.win_id)
+        self.buf_id = nil
+        self.win_id = nil
+    end
+end
+
+-- This is not cool.
+-- Use Magic8ballFloat:toggle() instead.
 function Magic8ballFloat:show()
     if self.buf_id ~= nil then
         return
@@ -54,6 +68,8 @@ function Magic8ballFloat:show()
     self.win_id = win_id
 end
 
+-- This is not cool.
+-- Use Magic8ballFloat:toggle() instead.
 function Magic8ballFloat:hide()
     if self.buf_id == nil then
         return
@@ -64,5 +80,4 @@ function Magic8ballFloat:hide()
     self.win_id = nil
 end
 
-float = Magic8ballFloat:new()
-return float
+return Magic8ballFloat:new()
