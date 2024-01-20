@@ -1,16 +1,19 @@
+local utils = require("magic8ball.utils")
+
 --@class Magic8ballFloat
 --@field m8b_state Magic8ballState
 --@field buf_id number
 --@field win_id number
+--@field closing boolean
 local Magic8ballFloat = {}
 Magic8ballFloat.__index = Magic8ballFloat
 
 local function close_window(buf_id, win_id)
-    if vim.api.nvim_win_is_valid(win_id) then
+    if win_id ~= nil and vim.api.nvim_win_is_valid(win_id) then
         vim.api.nvim_win_close(win_id, true)
     end
 
-    if vim.api.nvim_buf_is_valid(buf_id) then
+    if buf_id ~= nil and vim.api.nvim_buf_is_valid(buf_id) then
         vim.api.nvim_buf_delete(buf_id, { force = true })
     end
 end
@@ -40,6 +43,7 @@ function Magic8ballFloat.new(m8b_state)
         m8b_state = m8b_state,
         buf_id = nil,
         win_id = nil,
+        closing = false,
     }, Magic8ballFloat)
     return self
 end
@@ -49,10 +53,22 @@ function Magic8ballFloat:toggle()
         local buf_id, win_id = create_window()
         self.buf_id = buf_id
         self.win_id = win_id
+
+        utils.on_close(buf_id, function()
+            if self.closing then
+                return
+            end
+
+            close_window(nil, self.win_id)
+            self.buf_id = nil
+            self.win_id = nil
+        end)
     else
+        self.closing = true
         close_window(self.buf_id, self.win_id)
         self.buf_id = nil
         self.win_id = nil
+        self.closing = false
     end
 end
 
