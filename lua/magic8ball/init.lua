@@ -3,7 +3,7 @@ local float = require("magic8ball.ui.magic8ball-float")
 local State = require("magic8ball.state")
 
 --@class Magic8Ball
---@field state
+--@field state Magic8BallState
 --@field float Magic8ballFloat
 local Magic8Ball = {}
 
@@ -27,6 +27,10 @@ function Magic8Ball:setup()
             self.float:resize()
         end
     })
+    --@param key string
+    vim.on_key(function(key)
+        self.state:handle_key(key)
+    end)
 end
 
 return Magic8Ball.new()

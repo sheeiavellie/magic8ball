@@ -8,4 +8,7 @@ function Magic8BallState.new()
     }, Magic8BallState)
 end
 
+function Magic8BallState:handle_key(key)
+end
+
 return Magic8BallState

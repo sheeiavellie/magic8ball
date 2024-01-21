@@ -19,13 +19,15 @@ local function close_window(buf_id, win_id)
 end
 
 local function create_window_config()
-    local ui = vim.api.nvim_list_uis()[1]
+    local width = 34
+    local height = 5
+    --local ui = vim.api.nvim_list_uis()[1]
     return {
         relative = 'editor',
-        row = math.floor(((vim.o.lines - 5) / 2) - 1),
-        col = math.floor((vim.o.columns - 24) / 2),
-        width = 24,
-        height = 5,
+        row = math.floor(((vim.o.lines - height) / 2) - 1),
+        col = math.floor((vim.o.columns - width) / 2),
+        width = width,
+        height = height,
         border = 'rounded',
         title = 'Magic8Ball🔮',
         title_pos = 'center',
@@ -35,6 +37,10 @@ end
 
 local function create_window()
     local buf_id = vim.api.nvim_create_buf(false, true)
+
+    vim.api.nvim_buf_set_lines(buf_id, 4, 4, false, {
+        "Press ENTER to get the answer...",
+    })
     local config = create_window_config()
     local win_id = vim.api.nvim_open_win(buf_id, true, config)
     return buf_id, win_id
