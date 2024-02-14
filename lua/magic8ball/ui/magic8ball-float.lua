@@ -39,7 +39,7 @@ local function create_window()
     local buf_id = vim.api.nvim_create_buf(false, true)
 
     vim.api.nvim_buf_set_lines(buf_id, 4, 4, false, {
-        "Press ENTER to get the answer...",
+        "AMOGUS Press ENTER to get the answer...",
     })
     local config = create_window_config()
     local win_id = vim.api.nvim_open_win(buf_id, true, config)
