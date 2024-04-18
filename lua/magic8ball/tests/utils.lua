@@ -1,4 +1,4 @@
-local float = require("magic8ball.ui.magic8ball-float")
+local float = require("magic8ball.ui.float")
 
 local M = {}
 

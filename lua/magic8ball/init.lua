@@ -1,5 +1,5 @@
 local utils = require("magic8ball.utils")
-local float = require("magic8ball.ui.magic8ball-float")
+local float = require("magic8ball.ui.float")
 local State = require("magic8ball.state")
 
 --@class Magic8Ball
