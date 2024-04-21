@@ -24,7 +24,7 @@ local function create_buffer()
     vim.bo[buf_id].buftype = 'nofile'
     vim.bo[buf_id].readonly = false
     vim.api.nvim_buf_set_lines(buf_id, 4, 4, false, {
-        "Press X to get the answer...",
+        "Press ENTER to get the answer...",
     })
     vim.bo[buf_id].readonly = true
     vim.bo[buf_id].modifiable = false

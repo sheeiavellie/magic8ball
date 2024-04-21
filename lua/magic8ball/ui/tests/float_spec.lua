@@ -1,12 +1,12 @@
 local equal = assert.are.same
 
 local utils = require("magic8ball.tests.utils")
-local float = require("magic8ball.ui.magic8ball-float")
+local float = require("magic8ball.ui.float")
 
 describe("magic8ball", function()
     before_each(function()
         utils.clear_memory()
-        float = require("magic8ball.ui.magic8ball-float")
+        float = require("magic8ball.ui.float")
     end)
 
     it("make sure that toggle when called by float:toggle()", function()
