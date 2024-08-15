@@ -1,37 +1,29 @@
-local utils = require("magic8ball.utils")
-local float = require("magic8ball.ui.float")
-local State = require("magic8ball.state")
-
+local Utils = require("magic8ball.utils")
+local Float = require("magic8ball.ui.float")
 
 ---@class Magic8Ball
----@field state Magic8BallState
 ---@field float Magic8ballFloat
 local Magic8Ball = {}
 
 Magic8Ball.__index = Magic8Ball
 
 ---@return Magic8Ball
-function Magic8Ball.new()
-    local state = State.new()
-    local self = setmetatable({
-        state = state,
-        float = float.new(state),
-    }, Magic8Ball)
-    return self
+function Magic8Ball:new()
+    local magic8ball = setmetatable({
+        float = Float:new(),
+    }, self)
+    return magic8ball
 end
 
----@param self Magic8Ball
+local magic8ball = Magic8Ball:new()
+
 function Magic8Ball:setup()
     vim.api.nvim_create_autocmd('WinResized', {
-        group = utils.magic8ball_group_id,
+        group = Utils.magic8ball_group_id,
         callback = function()
             self.float:resize()
         end
     })
-    ---@param key string
-    vim.on_key(function(key)
-        self.state:handle_key(key)
-    end)
 end
 
-return Magic8Ball.new()
+return magic8ball

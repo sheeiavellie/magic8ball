@@ -1,11 +1,11 @@
-local utils = require("magic8ball.utils")
+local Utils = require("magic8ball.utils")
 
 ---@class Magic8ballFloat
----@field m8b_state Magic8ballState
 ---@field buf_id number
 ---@field win_id number
 ---@field closing boolean
 local Magic8BallFloat = {}
+
 Magic8BallFloat.__index = Magic8BallFloat
 
 local function close_float(buf_id, win_id)
@@ -56,14 +56,13 @@ local function create_float()
     return buf_id, win_id
 end
 
-function Magic8BallFloat.new(m8b_state)
-    local self = setmetatable({
-        m8b_state = m8b_state,
+function Magic8BallFloat:new()
+    local ui = setmetatable({
         buf_id = nil,
         win_id = nil,
         closing = false,
-    }, Magic8BallFloat)
-    return self
+    }, self)
+    return ui
 end
 
 function Magic8BallFloat:resize()
@@ -80,7 +79,7 @@ function Magic8BallFloat:toggle()
         self.buf_id = buf_id
         self.win_id = win_id
 
-        utils.on_close(buf_id, function()
+        Utils.on_close(buf_id, function()
             if self.closing then
                 return
             end
