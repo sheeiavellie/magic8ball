@@ -1,5 +1,4 @@
---@class Magic8BallState
---
+---@class Magic8BallState
 local Magic8BallState = {}
 Magic8BallState.__index = Magic8BallState
 

@@ -1,10 +1,10 @@
 local utils = require("magic8ball.utils")
 
---@class Magic8ballFloat
---@field m8b_state Magic8ballState
---@field buf_id number
---@field win_id number
---@field closing boolean
+---@class Magic8ballFloat
+---@field m8b_state Magic8ballState
+---@field buf_id number
+---@field win_id number
+---@field closing boolean
 local Magic8BallFloat = {}
 Magic8BallFloat.__index = Magic8BallFloat
 
