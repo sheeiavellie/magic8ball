@@ -3,26 +3,18 @@ local M = {}
 ---@class Magic8BallSettings
 ---@field use_cursor_position_for_random boolean
 
----@class AnswersConfig
----@field answers_list string[]
----@field answers_file_path string
-
----@class UIConfig
----@field float FloatConfig
-
 ---@class Magic8BallConfig
 ---@field settings Magic8BallSettings
----@field answers AnswersConfig
+---@field answers {[number]: string[]}
 
----@return Magic8BallConfig config
+---@return Magic8BallConfig
 function M.get_default_config()
     return {
         settings = {
             use_cursor_position_for_random = true,
         },
         answers = {
-            answers_list = {
-                --positive
+            [1] = {
                 "It is certain",
                 "It is decidedly so",
                 "Without a doubt",
@@ -33,20 +25,21 @@ function M.get_default_config()
                 "Outlook good",
                 "Yes",
                 "Signs point to yes",
-                --neutral
+            },
+            [0] = {
                 "Reply hazy, try again",
                 "Ask again later",
                 "Better not tell you now",
                 "Cannot predict now",
                 "Concentrate and ask again",
-                --negative
+            },
+            [-1] = {
                 "Don't count on it",
                 "My reply is no",
                 "My sources say no",
                 "Outlook not so good",
                 "Very doubtful",
             },
-            answers_file_path = "",
         },
     }
 end
